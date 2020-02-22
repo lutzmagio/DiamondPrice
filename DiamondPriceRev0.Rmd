@@ -1,0 +1,44 @@
+---
+title: "Diamond Price Prediction"
+author: "Henry Voelker"
+date: "22nd February 2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## General
+
+The Diamond Price Prediction Shiny web app allows to evaluate the "diamond"
+dataset from the UsingR package. A linear model is fitted by the app in the
+data points. A prediction for user-defined mass (carats) is displayed.
+
+## User Guide
+- Use the slider to adjust the user-defined mass (carats).
+- Show or hide the linear function visualizing the model fitted.
+
+## Introduction to the Diamond Dataset
+```{r loadPackage, results = FALSE, message = FALSE}
+library(UsingR)
+data(diamond)
+```
+
+```{r intro, echo = TRUE}
+head(diamond)
+```
+
+
+## Linear Model
+A linear model is created in R. The formula refers to y = m * x + n where:
+
+- y = price
+- m = "carat" = slope term (increase of price per increase of carats)
+- x = mass (carats)
+- n = "intercept" term (theoretical price for a 0.00 carat diamond)
+
+```{r linearModel, echo = TRUE}
+fit <- lm(price ~ carat, data = diamond)
+coef(fit)
+```
